@@ -42,7 +42,6 @@ public class UseController {
         logger.debug("logon request: {username={}, password={}}", userName, password);
         boolean checkPassword = identityService.checkPassword(userName, password);
         if (checkPassword) {
-
             // read user from database
             User user = identityService.createUserQuery().userId(userName).singleResult();
             UserUtil.saveUserToSession(session, user);
