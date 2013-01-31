@@ -17,27 +17,10 @@ $(function () {
         }
     });
 
-    // 自动根据分辨率调整iframe的大小
-    autoResizeIframeHeight();
-    window.onresize = function () {
-        autoResizeIframeHeight();
+    var el = $('.nav a[href^="' + reqUri + '"]').parent();
+    if (el.parent().hasClass('dropdown-menu')) {
+        el.parent().parent().addClass('active');
+    } else {
+        el.addClass('active');
     }
-
-    $('.nav a[rel]').click(function () {
-        $('.nav .active').removeClass('active');
-        if ($(this).parents('li').hasClass('dropdown')) {
-            $(this).parents('.dropdown').addClass('active');
-            $('.active > a').trigger('click');
-        } else {
-            $(this).parent().addClass('active');
-        }
-        $('iframe').attr('src', ctx + "/" + $(this).attr('rel'));
-    });
 });
-
-/**
- * 自动根据分辨率调整iframe的大小
- */
-function autoResizeIframeHeight() {
-    $('iframe').height(document.documentElement.clientHeight - 120);
-}

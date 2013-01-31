@@ -1,110 +1,57 @@
 <%@page import="me.kafeitu.demo.activiti.util.PropertyFileUtil" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%
-    PropertyFileUtil.init();
-%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <%@ include file="/common/global.jsp" %>
-    <script>
-        var notLogon = ${empty user};
-        if (notLogon) {
-            location.href = '${ctx}/login?timeout=true';
-        }
-    </script>
-    <%@ include file="/common/meta.jsp" %>
-    <title>Activiti-演示系统</title>
-    <%@ include file="/common/include-base-styles.jsp" %>
-    <link rel="stylesheet" type="text/css" href="${ctx }/css/menu.css"/>
-    <%@ include file="/common/include-custom-styles.jsp" %>
-    <link href="${ctx }/css/main.css" type="text/css" rel="stylesheet"/>
-    <style type="text/css">
-        #activitiLogo {
-            height: 30px !important;
-            margin-top: -8px;
-            margin-bottom: -8px;
-        }
-
-        #footer {
-            text-align: center !important;
-        }
-
-        iframe {
-            margin-top: .5em;
-        }
-    </style>
-
-    <script src="${ctx }/js/common/jquery.js" type="text/javascript"></script>
-    <script src="${ctx }/js/common/plugins/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-    <script src="${ctx }/js/module/main/main.js" type="text/javascript"></script>
+    <title>Activiti 演示系统</title>
 </head>
 <body>
+<h3 class="span10 offset1">欢迎访问Activiti Demo，专为优秀的BPMN2.0规范的轻量级工作流引擎Activiti服务</h3>
 
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a href="#" class="brand">
-                Demo For
-                <img id="activitiLogo" src="${ctx}/images/activiti_logo.png"/>
-            </a>
+<div class="span6 offset3">
+    <dl>
+        <dt><strong>项目说明：</strong></dt>
+        <dd><a target="_blank" href='https://github.com/henryyan/kft-activiti-demo'>kft-activiti-demo</a>为Activiti初学者快速入门所设计。
+        </dd>
+        <dd>源代码托管Github：<a target="_blank" href='https://github.com/henryyan/kft-activiti-demo'>https://github.com/henryyan/kft-activiti-demo</a>
+        </dd>
 
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li class="active"><a href="#" rel="main/welcome.action"><i class="icon-home icon-black"></i>首页</a>
-                    </li>
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i
-                                class="icon-th-large icon-black"></i>请假（自定义表单）<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" rel="oa/leave/apply">请假申请(自定)</a></li>
-                            <li><a href="#" rel="oa/leave/list/task">请假办理(自定)</a></li>
-                            <li><a href="#" rel="oa/leave/list/running">运行中流程(自定)</a></li>
-                            <li><a href="#" rel="oa/leave/list/finished">已结束流程(自定)</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-fire icon-black"></i>动态表单<b
-                                class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" rel="form/dynamic/process-list">流程列表(动态)</a></li>
-                            <li><a href="#" rel="form/dynamic/task/list">任务列表(动态)</a></li>
-                            <li><a href="#" rel="form/dynamic/process-instance/running/list">运行中流程表(动态)</a></li>
-                            <li><a href="#" rel="form/dynamic/process-instance/finished/list">已结束流程(动态)</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" rel='workflow/process-list'><i class="icon-wrench icon-black"></i>流程管理</a></li>
-                </ul>
+        <dt><strong>架构说明：</strong></dt>
+        <dd>Activiti版本：<%=PropertyFileUtil.get("activiti.version") %>
+        </dd>
+        <dd>使用<a href="http://maven.apache.org" target="_blank">Maven</a>管理依赖</dd>
 
-                <ul class="nav pull-right">
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="icon-user icon-black" style="margin-right: .3em"></i>${user.lastName }/${user.id }<b
-                                class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a id="changePwd" href="#"><i class="icon-wrench icon-black"></i>修改密码</a></li>
-                            <li><a id="loginOut" href="#"><i class="icon-eject icon-black"></i>安全退出</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <iframe id="mainIframe" name="mainIframe" src="welcome" class="module-iframe" scrolling="auto" frameborder="0"
-                style="width:100%;"></iframe>
-    </div>
-    <div id="footer">
-        <hr class="soften">
-        <a href="http://www.kafeitu.me">www.kafeitu.me</a> By <a href="http://weibo.com/kafeituzi">@咖啡兔</a>
-        <span class="copyright">©2012</span>
-        <span class="version" style="padding-left: .5em">版本：<%=PropertyFileUtil.get("system.version") %></span>
-    </div>
+        <dt><strong>演示内容：</strong></dt>
+        <dd>
+            <ul>
+                <li>部署流程</li>
+                <li>启动流程</li>
+                <li>任务签收</li>
+                <li>任务办理</li>
+                <li>驳回请求</li>
+                <li>查询运行中流程</li>
+                <li>查询历史流程</li>
+                <li>任务监听</li>
+                <li>自定义表单</li>
+                <li>动态表单</li>
+            </ul>
+        </dd>
+
+        <dt><strong>资源、文档链接：</strong></dt>
+        <dd><b>Wiki：</b><a target="_blank" href="https://github.com/henryyan/kft-activiti-demo/wiki">https://github.com/henryyan/kft-activiti-demo/wiki</a>
+        </dd>
+        <dd><b>Demo源码：</b><a target="_blank" href="https://github.com/henryyan/kft-activiti-demo">https://github.com/henryyan/kft-activiti-demo</a>
+        </dd>
+        <dd><b>Activiti资料：</b><a target="_blank" href="http://www.kafeitu.me/categories.html#activiti-ref">http://www.kafeitu.me/categories.html#activiti-ref</a>
+        </dd>
+
+        <dt>关于Bootstrap分支</dt>
+        <dd>基于优秀的UI框架<a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Bootstrap</a></dd>
+        <dd>能用Bootstrap代替的尽量代替原有的控件</dd>
+        <dd>纯粹为学习Bootstrap建立的分支</dd>
+        <dd>有需要可以从这里<a href="https://github.com/henryyan/kft-activiti-demo/tree/bootstrap" target="_blank">Fork</a>
+        </dd>
+    </dl>
+</div>
 </body>
 </html>

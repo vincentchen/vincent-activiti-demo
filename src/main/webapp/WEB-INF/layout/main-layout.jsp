@@ -51,7 +51,7 @@
 
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="active"><a href="${ctx}/main/index" rel="main/welcome.action"><i
+                    <li><a href="${ctx}/main/index" rel="main/welcome.action"><i
                             class="icon-home icon-black"></i>首页</a>
                     </li>
                     <li class="dropdown">
